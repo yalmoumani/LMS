@@ -9,16 +9,16 @@ class Courses extends Model
 {
     use HasFactory;
     protected $fillable = [
-        "id","courseName","courseDescription","courseImg","speciality","semester","teacherID",
+        "id","courseName","courseDescription","courseImg","section","semester","teacherID",
     ];
 
     public function id()
     {
-        return $this->belongsTo(Exams::class);
+        return $this->belongsToMany(Exams::class);
     }
     public function students()
     {
-        return $this->belongsToMany(User::class,'courseID','userID');
+        return $this->hasMany(User::class,'courses_users','courseID','userID');
     }
     public function assigments()
     {
@@ -27,5 +27,13 @@ class Courses extends Model
     public function semester(){
         $this->belongsToMany(Semester::class);
 }
-
+    public function speciality(){
+        $this->belongsToMany(Speciality::class);
+}
+    public function quizzes(){
+        $this->belongsToMany(Quizzes::class);
+}
+    public function tests(){
+        $this->belongsToMany(Tests::class);
+}
 }

@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Quizzes extends Model
 {
     use HasFactory;
-    protected $fillable = [ "startDate","closingDate","duration","courseID"
+    protected $fillable = [ "quizName","quizDescription","openTime",
+    "closingTime",
+    "duration",
+    "courseID",
 ];
+public function quizStructure(){
+    $this->belongsTo(QuizStructure::class);
+}
+public function quizSubmissions(){
+    $this->belongsTo(QuizSubmissions::class);
+}
 }

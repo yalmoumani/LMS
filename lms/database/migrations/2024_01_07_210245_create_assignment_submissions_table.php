@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('assignment_submissions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('userID');
+            $table->unsignedBigInteger('assignmentID');
+            $table->binary('files');
+            $table->integer('grade')->nullable();
             $table->timestamps();
         });
     }

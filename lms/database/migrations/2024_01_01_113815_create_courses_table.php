@@ -16,7 +16,18 @@ return new class extends Migration
             $table->timestamps();
             $table->string('courseName');
             $table->string('courseDescription');
-            $table->longText('courseImg');
+            $table->binary('courseImg');
+            $table->unsignedBigInteger('speciality');
+            $table->unsignedBigInteger('semester');
+            $table->unsignedBigInteger('teacherID');
+
+
+            $table->foreign('speciality')->references('id')
+            ->on('specialities')->onDelete('cascade');
+            $table->foreign('semester')->references('id')
+            ->on('semesters')->onDelete('cascade');
+            $table->foreign('teacherID')->references('id')
+            ->on('users')->onDelete('cascade');
 
         });
     }

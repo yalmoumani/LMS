@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('test_structures', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('testID');
+            $table->json('testStructure');
             $table->timestamps();
+
+            $table->foreign('testID')->references('id')
+            ->on('tests')->onDelete('cascade');
         });
     }
 

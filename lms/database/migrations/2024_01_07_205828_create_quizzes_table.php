@@ -14,6 +14,15 @@ return new class extends Migration
         Schema::create('quizzes', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('quizName');
+            $table->string('quizDescription');
+            $table->dateTime('openTime');
+            $table->dateTime('closingTime');
+            $table->integer('duration');
+            $table->unsignedBigInteger('courseID');
+
+            $table->foreign('courseID')->references('id')
+            ->on('courses')->onDelete('cascade');
         });
     }
 

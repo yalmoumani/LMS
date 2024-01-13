@@ -14,12 +14,14 @@ class Assignments extends Model
         "assignmentDescription",
         "dueDate",
         "openDate",
-        "status",
         "courseID",
-        "grade",
+        "files",
     ];
 
     public function course(){
      $this->belongsTo(Courses::class);
+    }
+    public function AssignmentSubmissions(){
+     $this->belongsTo(AssignmentSubmissions::class);
     }
 }

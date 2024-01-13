@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::create('quiz_structures', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->json('quizStructure');
+            $table->unsignedBigInteger('quizID');
+
+            $table->foreign('quizID')->references('id')->on('quizzes');
         });
     }
 

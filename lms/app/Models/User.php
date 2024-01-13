@@ -48,9 +48,21 @@ class User extends Authenticatable
     ];
 
     public function  user(){
-        return $this->belongsToMany(Courses::class, 'courseID','userID');
+        return $this->belongsToMany(Courses::class,'courses_users','courseID','userID');
     }
     public function  roles(){
         return $this->belongsToMany(Roles::class, 'roles_users','roleID','userID');
+    }
+    public function  quizSubmissions(){
+        return $this->belongsToMany(QuizSubmissions::class);
+    }
+    public function  assignmentSubmissions(){
+        return $this->belongsToMany(AssignmentSubmissions::class);
+    }
+    public function  examSubmissions(){
+        return $this->belongsToMany(ExamSubmissions::class);
+    }
+    public function  testSubmissions(){
+        return $this->belongsToMany(TestSubmissions::class);
     }
 }

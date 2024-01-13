@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigInteger('mobile');
             $table->bigInteger('emergencyContact');
             $table->date('dob');
-            $table->longText('userImg');
+            $table->binary('userImg');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

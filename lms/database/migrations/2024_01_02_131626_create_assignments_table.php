@@ -18,9 +18,8 @@ return new class extends Migration
             $table->string('assignmentDescription');
             $table->dateTime('dueDate');
             $table->dateTime('openDate');
-            $table->enum('status',['Submitted', 'Not Submitted'])->default('Not Submitted');
+            $table->binary('files');
             $table->unsignedBigInteger('courseID');
-            $table->integer('grade')->nullable();
 
             $table->foreign('courseID')->constrained('assignments_courseID')->references('id')->on('courses')->onDelete('cascade');
         });

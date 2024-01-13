@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('exams', function (Blueprint $table) {
+        Schema::create('tests', function (Blueprint $table) {
             $table->id();
-            $table->string('examName');
-            $table->string('examDescription');
             $table->timestamps();
-            $table->enum('examType', ['Midterm', 'Final']);
-            $table->dateTime('startDate');
-            $table->dateTime('closingDate');
+            $table->string('testName');
+            $table->string('testDescription');
+            $table->dateTime('openTime');
+            $table->dateTime('closingTime');
             $table->integer('duration');
             $table->unsignedBigInteger('courseID');
 
-            $table->foreign('courseID')->constrained('exams_courseID')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('courseID')->references('id')
+            ->on('courses')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('exams');
+        //
     }
 };

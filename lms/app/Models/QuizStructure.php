@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class QuizStructure extends Model
 {
     use HasFactory;
-    protected $fillable = ["examID","structureData"];
+    protected $fillable = ["quizID","quizStructure"];
 
+    public function quizzes(){
+        $this->hasMany(Quizzes::class,"quizID");
+    }
 }

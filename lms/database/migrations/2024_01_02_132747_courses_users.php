@@ -15,13 +15,12 @@ return new class extends Migration
             $table->id();
             $table->unsignedBiginteger('courseID')->unsigned();
             $table->unsignedBiginteger('userID')->unsigned();
+            $table->timestamps();
 
             $table->foreign('courseID')->references('id')
                  ->on('courses')->onDelete('cascade');
             $table->foreign('userID')->references('id')
                 ->on('users')->onDelete('cascade');
-
-            $table->timestamps();
     });
 }
 

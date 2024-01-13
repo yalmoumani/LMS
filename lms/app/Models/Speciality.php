@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Speciality extends Model
 {
     use HasFactory;
+    protected $fillable = ["specialityName"];
+
+public function courses(){
+     $this->hasMany(Courses::class);
+}
 }

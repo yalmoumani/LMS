@@ -14,6 +14,16 @@ return new class extends Migration
         Schema::create('quiz_submissions', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->unsignedBigInteger('userID');
+            $table->unsignedBigInteger('quizID');
+            $table->json('quizSubmission');
+            $table->bigInteger('grade')->nullable();
+
+            $table->foreign('userID')->references('id')
+            ->on('users')->onDelete('cascade');
+            $table->foreign('quizID')->references('id')
+            ->on('quizzes')->onDelete('cascade');
+
         });
     }
 

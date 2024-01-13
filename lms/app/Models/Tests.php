@@ -8,6 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Tests extends Model
 {
     use HasFactory;
-    protected $fillable = [ "startDate","closingDate","duration","courseID"
+    protected $fillable = [ "testName","testDescription","openTime",
+    "closingTime",
+    "duration",
+    "courseID",
 ];
+public function testStructure(){
+    $this->belongsToMany(TestStructure::class);
+ }
+public function courses(){
+    $this->hasMany(Courses::class);
+ }
 }
