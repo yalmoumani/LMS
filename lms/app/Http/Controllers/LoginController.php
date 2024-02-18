@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -15,8 +14,8 @@ class LoginController extends Controller
 
         try {
             if (Auth::attempt($credentials)) {
-                $user = Auth::user();
-                $token = $user->createToken("auth_token")->accessToken;
+                $user = Auth::user(); // Retrieve the authenticated user
+                $token = $user->createToken($request->token_name)->plainTextToken;
 
                 // Return JSON response indicating successful login
                 return response()->json([
@@ -41,7 +40,7 @@ class LoginController extends Controller
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([
-            'message' => 'Successfully logged out.',
+            'message' => 'Successfully logged out.'
         ]);
     }
 }

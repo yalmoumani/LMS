@@ -11,8 +11,47 @@ class ExamsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function createExam($question, $options, $answer)
+
+
+    //  add the number of questions
+    // creates the basic componenets of the exam without the structural parts of questions, answers, and options
+    public function createExam(Request $request){
+        $requestData = [
+            'examName' => 'required',
+            'examDescription' => 'required',
+            'created_at' => now(),
+            'updated_at' => now(),
+            'examType' => 'required|in:Midterm,Final',
+            'startDate' => 'required|date',
+            'closingDate' => 'required|date',
+            'duration' => 'required',
+            'courseID' => 'required',
+        ];
+
+        $validatedData = $request->validate($requestData);
+
+        $exam = new Exams();
+
+        $exam->examName = $validatedData['examName'];
+        $exam->examDescription = $validatedData['examDescription'];
+        $exam->created_at = $validatedData['created_at'];
+        $exam->updated_at = $validatedData['updated_at'];
+        $exam->examType = $validatedData['examType'];
+        $exam->startDate = $validatedData['startDate'];
+        $exam->closingDate = $validatedData['closingDate'];
+        $exam->duration = $validatedData['duration'];
+        $exam->courseID = $validatedData['courseID'];
+
+        // Save the exam
+        $exam->save();
+
+        // Return success response
+        return response()->json(['message' => 'Exam successfully created', 'exam' => $exam], 200);
+    }
+    // creates the structure of the exam using an array to save the questions and options
+    public function examDetails($question, $options, $answer, $examID)
     {
+        $examID -> examID;
         $exam = array(
             'question' => $question,
             'options' => array_values($options),
