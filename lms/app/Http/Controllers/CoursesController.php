@@ -27,4 +27,10 @@ class CoursesController extends Controller
         ]);
 
         return response()->json(["message" => "Course created successfully"], 200);    }
+        public function editCourse(){
+
+        }
+        public function deleteCourse(){
+
+        }
 }
