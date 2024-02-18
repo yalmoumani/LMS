@@ -10,7 +10,7 @@ class ReportsController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function makeReport()
     {
         //
     }
@@ -18,7 +18,7 @@ class ReportsController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function viewReports()
     {
         //
     }
@@ -26,7 +26,7 @@ class ReportsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function cancelReport(Request $request)
     {
         //
     }
@@ -34,32 +34,9 @@ class ReportsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(reports $reports)
+    public function personalReports(reports $reports)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(reports $reports)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, reports $reports)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(reports $reports)
-    {
-        //
-    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminstratorController;
+use App\Http\Controllers\ExamsController;
 use App\Http\Controllers\CoursesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,3 +27,10 @@ Route::put('/admin/{userId}', [AdminstratorController::class, 'editUser']);
 Route::get('/admin', [AdminstratorController::class, 'getAll']);
 
 Route::post('/courses/createCourse', [CoursesController::class, 'createCourse']);
+
+
+    Route::post('exams', [ExamsController::class, 'createExam']); // Create a new exam
+    // Route::put('exams/{id}', 'ExamsController@editExam'); // Edit an existing exam
+    // Route::delete('exams/{id}', 'ExamsController@deleteExam'); // Delete an exam
+    // Route::delete('exams/{id}/questions/{questionIndex}', 'ExamsController@deleteQuestion'); // Delete a question
+    // Route::delete('exams/{id}/options/{optionIndex}', 'ExamsController@deleteOption'); // Delete an option
