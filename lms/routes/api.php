@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminstratorController;
+use App\Http\Controllers\AssignmentsController;
 use App\Http\Controllers\ExamsController;
 use App\Http\Controllers\CoursesController;
 use Illuminate\Http\Request;
@@ -30,7 +31,12 @@ Route::post('/courses/createCourse', [CoursesController::class, 'createCourse'])
 
 
     Route::post('exams', [ExamsController::class, 'createExam']); // Create a new exam
+    Route::post('examQuestions', [ExamsController::class, 'examDetails']); // Create a new exam
+    Route::delete('exams/{id}', [ExamsController::class, 'deleteExam']); // Create a new exam
     // Route::put('exams/{id}', 'ExamsController@editExam'); // Edit an existing exam
     // Route::delete('exams/{id}', 'ExamsController@deleteExam'); // Delete an exam
     // Route::delete('exams/{id}/questions/{questionIndex}', 'ExamsController@deleteQuestion'); // Delete a question
     // Route::delete('exams/{id}/options/{optionIndex}', 'ExamsController@deleteOption'); // Delete an option
+
+
+    Route::post('assignments', [AssignmentsController::class, 'createAssignment']); // Create a new exam

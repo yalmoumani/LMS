@@ -15,6 +15,7 @@ class ExamsController extends Controller
 
     //  add the number of questions
     // creates the basic componenets of the exam without the structural parts of questions, answers, and options
+    // needs to be updated so their can only be one midterm and final
     public function createExam(Request $request){
         $requestData = [
             'examName' => 'required',
@@ -22,8 +23,8 @@ class ExamsController extends Controller
             'created_at' => now(),
             'updated_at' => now(),
             'examType' => 'required|in:Midterm,Final',
-            'startDate' => 'required|date',
-            'closingDate' => 'required|date',
+            'startDate' => 'required|date_format:Y-m-d H:i:s',
+                'closingDate' => 'required|date_format:Y-m-d H:i:s|after:startDate',
             'duration' => 'required',
             'courseID' => 'required',
         ];
@@ -34,8 +35,6 @@ class ExamsController extends Controller
 
         $exam->examName = $validatedData['examName'];
         $exam->examDescription = $validatedData['examDescription'];
-        $exam->created_at = $validatedData['created_at'];
-        $exam->updated_at = $validatedData['updated_at'];
         $exam->examType = $validatedData['examType'];
         $exam->startDate = $validatedData['startDate'];
         $exam->closingDate = $validatedData['closingDate'];
@@ -49,27 +48,42 @@ class ExamsController extends Controller
         return response()->json(['message' => 'Exam successfully created', 'exam' => $exam], 200);
     }
     // creates the structure of the exam using an array to save the questions and options
-    public function examDetails($question, $options, $answer, $examID)
+    // needs to be corrected to only allow one submission of answers for an exam
+    public function examDetails(Request $request)
     {
-        $examID -> examID;
-        $exam = array(
-            'question' => $question,
-            'options' => array_values($options),
-            'answer' => $answer
-        );
+        $examID = $request->examID;
+        $questions = $request->questions;
+
+        $exam = [];
+
+        foreach ($questions as $questionData) {
+            $question = $questionData['question'];
+            $options = array_values($questionData['options']);
+            $answer = $questionData['answer'];
+
+            $exam[] = [
+                'question' => $question,
+                'options' => $options,
+                'answer' => $answer
+            ];
+        }
 
         $examStructure = new ExamStructure();
-        $examStructure->exam = $exam;
+        $examStructure->examID = $examID;
+        $examStructure->examStructure = json_encode($exam); // Encode the exam structure as a JSON string
         $examStructure->save();
 
-        return $exam;
+        return response()->json(['message'=>'Your questions and answers have been saved.'],200);
     }
     public function editExam()
     {
     }
-    public function deleteExam($examId)
+
+    // Takes the id of the exam and deletes it along with all the questions and gives back response
+    public function deleteExam($id)
     {
-      ExamStructure::findorfail($examId)->delete();
+      Exams::findorfail($id)->delete();
+      return response()->json(['message'=>'Exam has been successfully deleted.'],200);
     }
     public function deleteQuestion($examId, $questionIndex)
 {
