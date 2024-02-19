@@ -24,7 +24,7 @@ class ExamsController extends Controller
             'updated_at' => now(),
             'examType' => 'required|in:Midterm,Final',
             'startDate' => 'required|date_format:Y-m-d H:i:s',
-                'closingDate' => 'required|date_format:Y-m-d H:i:s|after:startDate',
+            'closingDate' => 'required|date_format:Y-m-d H:i:s|after:startDate',
             'duration' => 'required',
             'courseID' => 'required',
         ];
@@ -75,8 +75,7 @@ class ExamsController extends Controller
 
         return response()->json(['message'=>'Your questions and answers have been saved.'],200);
     }
-    public function editExam()
-    {
+    public function editExam(){
     }
 
     // Takes the id of the exam and deletes it along with all the questions and gives back response
@@ -97,8 +96,7 @@ class ExamsController extends Controller
     }
 }
 
-public function deleteOption($examId, $optionIndex)
-{
+public function deleteOption($examId, $optionIndex){
     $examStructure = ExamStructure::findOrFail($examId);
     $options = $examStructure->exam['options'];
 

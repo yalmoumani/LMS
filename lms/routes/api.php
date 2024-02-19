@@ -40,3 +40,8 @@ Route::post('/courses/createCourse', [CoursesController::class, 'createCourse'])
 
 
     Route::post('assignments', [AssignmentsController::class, 'createAssignment']); // Create a new exam
+    Route::post('submit', [AssignmentsController::class, 'submitAssignment']); // Create a new exam
+    Route::put('assignments/{id}', [AssignmentsController::class, 'editAssignment']); // Create a new exam
+    Route::delete('assignments/{id}', [AssignmentsController::class, 'deleteAssignment']); // Create a new exam
+    Route::get('assignments/{id}', [AssignmentsController::class, 'showAssignment']); // Create a new exam
+    Route::get('assignmentsOverview/{corId}', [AssignmentsController::class, 'courseAssignments']); // Create a new exam

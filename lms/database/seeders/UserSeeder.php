@@ -21,8 +21,8 @@ class UserSeeder extends Seeder
         foreach ($roles as $role) {
             User::create([
                 "name" => $faker->name,
-                "mobile" => '07' . $faker->randomNumber(8),
-                "emergencyContact" => '07' . $faker->randomNumber(8),
+                "mobile" => '075' . $faker->randomNumber(7),
+                "emergencyContact" => '077' . $faker->randomNumber(7),
                 "dob" => $faker->date,
                 "email" => $faker->email,
                 "password" => Hash::make("password"),
