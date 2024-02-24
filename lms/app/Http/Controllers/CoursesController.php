@@ -30,7 +30,8 @@ class CoursesController extends Controller
         public function editCourse(){
 
         }
-        public function deleteCourse(){
-
+        public function deleteCourse($id){
+            Courses::findorfail($id, 'id')->delete();
+            return response()->json(['message' => 'Course successfully deleted'], 200);
         }
 }
